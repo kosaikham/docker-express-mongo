@@ -1,0 +1,25 @@
+version: "3"
+
+services:
+  api:
+    container_name: express_api
+    build: ./
+    working_dir: /api
+    ports:
+      - "80:3000"
+    links:
+      - mongo
+    networks:
+      - app-network
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
